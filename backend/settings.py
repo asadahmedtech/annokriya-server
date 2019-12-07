@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'wgr_%t_-!n%%)(s2$cy05bw7qioir=af&xgq8x7&b0+d=09(7*'
+SECRET_KEY = 'wgr_%t_-!n%%)(s2$cy05bw7qioir=af&xgq8x7&b0+d=09(7*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -94,25 +94,25 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-# DATABASES = { ‘default’: {
 
-# ‘ENGINE’: ‘django.db.backends.postgresql_psycopg2',
-#  ‘NAME’: ‘DATABASE_FROM_HEROKU’, 
-#  ‘USER’: ‘USERNAME_FROM_HEROKU’,
-#  ‘PASSWORD’: ‘PASSWORD_FROM_HEROKU’,
-#  ‘HOST’: ‘HOST_FROM_HEROKU’
-#  }
-# }
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'DATABASE_FROM_HEROKU',
+        'USER': 'USERNAME_FROM_HEROKU',
+        'PASSWORD': 'PASSWORD_FROM_HEROKU',
+        'HOST': 'HOST_FROM_HEROKU'
+    }
+}
 # Parse database configuration from $DATABASE_URL
 
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
-}
+# SECRET_KEY = config('SECRET_KEY')
+# DEBUG = config('DEBUG', default=False, cast=bool)
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=config('DATABASE_URL')
+#     )
+# }
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
