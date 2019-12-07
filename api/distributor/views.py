@@ -24,10 +24,11 @@ class getTask(APIView):
 
     def get(self, request, pk):
         DS = DistributorSystem()
+        check = TaskPath.objects.get(taskgivenID = 'IMGAAA' + str(1).zfill(6))
         if(DS.CURRENT_ITERATION == 0):
             DS.createPathIDSet()
             DS.createQueue()
-            if(DS.DB_CREATED == False):
+            if(len(check)==0):
                 DS.populateTaskPathModel()
                 
         nextID = DS.get_next_ID(prevID = pk)
