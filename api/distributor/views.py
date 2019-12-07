@@ -28,7 +28,7 @@ class getTask(APIView):
         if(DS.CURRENT_ITERATION == 0):
             DS.createPathIDSet()
             DS.createQueue()
-            if(len(check)==0):
+            if(len(list(check))==0):
                 DS.populateTaskPathModel()
                 
         nextID = DS.get_next_ID(prevID = pk)
