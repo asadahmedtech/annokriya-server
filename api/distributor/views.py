@@ -14,7 +14,7 @@ from distributor.distributor_system import DistributorSystem
 
 import json
 
-TASK_TYPE = 'IMGAAA'
+TASK_TYPE = 'IMGAA'
 
 class getTask(APIView):
     """View for user task distribution that deals with images"""
@@ -24,18 +24,17 @@ class getTask(APIView):
 
     def get(self, request, pk):
         DS = DistributorSystem()
-        check = TaskPath.objects.get(taskgivenID = 'IMGAAA' + str(1).zfill(6))
         if(DS.CURRENT_ITERATION == 0):
             DS.createPathIDSet()
             DS.createQueue()
-            if(not check):
+            if(DS.DB_CREATED == False):
                 DS.populateTaskPathModel()
                 
         nextID = DS.get_next_ID(prevID = pk)
         if(nextID == None):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        taskpath = TaskPath.objects.get(taskgivenID = 'IMGAAA' + str(nextID).zfill(6))
+        taskpath = TaskPath.objects.get(taskgivenID = 'IMGAA' + str(nextID).zfill(6))
         taskserialize = TaskPathSerializer(taskpath)
         DS.printQueue()
         return Response(taskserialize.data, status=status.HTTP_200_OK)

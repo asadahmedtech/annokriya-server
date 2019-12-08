@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from authentication.models import User, UserProfile
-
+from dashboard.models import Dashboard
 
 class UserProfileSerializer(serializers.ModelSerializer):
     
@@ -27,6 +27,9 @@ class UserSignUpSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         UserProfile.objects.create(user=user, **profile_data)
+
+        Dashboard.objects.create(user=user)
+        
         return user
 
     def update(self, instance, validated_data):

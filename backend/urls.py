@@ -30,6 +30,9 @@ urlpatterns = [
     # url(r'^api/customers/$', views.customers_list),
     # url(r'^api/customers/(?P<pk>[0-9]+)$', views.customers_detail),
     # url(r'^',views.homePageView)
+
+    url(r'^add_to_db/', include('merger.urls')),
+    path('dashboard/',include('dashboard.urls')),
 ]
 
 # distributorStatus(repeat=10, repeat_untill=None)

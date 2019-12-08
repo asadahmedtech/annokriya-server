@@ -11,10 +11,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import django_heroku
-from decouple import config
-import dj_database_url
-
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,8 +28,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 # Application definition
 
-
-
 INSTALLED_APPS = [
     # 'django.contrib.sites',
     'django.contrib.admin',
@@ -50,6 +44,8 @@ INSTALLED_APPS = [
     'distributor',
     # 'backgroundprocess',
     # 'background_task',
+    'merger',
+    'dashboard'
 ]
 
 MIDDLEWARE = [
@@ -104,18 +100,6 @@ DATABASES = {
         'HOST': 'HOST_FROM_HEROKU'
     }
 }
-# Parse database configuration from $DATABASE_URL
-
-# SECRET_KEY = config('SECRET_KEY')
-# DEBUG = config('DEBUG', default=False, cast=bool)
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default=config('DATABASE_URL')
-#     )
-# }
-
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 AUTH_USER_MODEL = 'authentication.User'
 # ACCOUNT_USER_MODEL_USERNAME_FIELD = 'em'
@@ -176,8 +160,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
@@ -186,6 +168,7 @@ STATICFILES_DIRS = (
 )
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -197,12 +180,35 @@ CORS_ORIGIN_WHITELIST = (
        'http://192.168.43.50:8000',
 )
 
-# CELERY STUFF
-BROKER_URL = 'redis://localhost:6379'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'Africa/Nairobi'
+# # CELERY STUFF
+# from celery.schedules import crontab
+# import redis
+# # # r = redis.from_url(os.environ.get("REDIS_URL"))
+# # CELERY_BROKER_URL = os.environ['REDIS_URL']
+# # CELERY_RESULT_BACKEND = os.environ.get('REDIS_URL')
 
-django_heroku.settings(locals())
+# CELERY_IMPORTS = ("backgroundprocess.task", )
+# CELERY_BROKER_URL = 'redis://localhost:6379'
+# CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+# CELERY_ACCEPT_CONTENT = ['application/json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_TIMEZONE = 'Africa/Nairobi'
+# CELERY_BEAT_SCHEDULE = {
+#     'task-merge-data': {
+#         'task': 'backgroundprocess.task.task_merge_data',
+#         'schedule': crontab(minute = '*/1'),
+#     }
+#  }
+# redis_url = urlparse.urlparse(os.environ.get('REDIS_URL'))
+# CACHES = {
+# "default": {
+# "BACKEND": "redis_cache.RedisCache",
+# "LOCATION": "{0}:{1}".format(redis_url.hostname, redis_url.port),
+# "OPTIONS": {
+# "PASSWORD": redis_url.password,
+# "DB": 0,
+# }
+# }
+# }
+
