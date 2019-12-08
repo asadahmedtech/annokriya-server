@@ -97,7 +97,7 @@ DATABASES = {
         'NAME': 'DATABASE_FROM_HEROKU',
         'USER': 'USERNAME_FROM_HEROKU',
         'PASSWORD': 'PASSWORD_FROM_HEROKU',
-        'HOST': 'postgres://rqpsoitnxwbqxo:e0b08ddc85b6c6d90846154e952a10bebd5b96b38153345af878dd5b38766c6e@ec2-54-243-241-62.compute-1.amazonaws.com:5432/d9s4n17li2stlr'
+        'DATABASE_URL': 'postgres://rqpsoitnxwbqxo:e0b08ddc85b6c6d90846154e952a10bebd5b96b38153345af878dd5b38766c6e@ec2-54-243-241-62.compute-1.amazonaws.com:5432/d9s4n17li2stlr'
     }
 }
 
