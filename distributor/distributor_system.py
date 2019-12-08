@@ -90,6 +90,11 @@ class DistributorSystem(object):
 			print(DistributorSystem.Qlist[i].queue)
 
 	def populateTaskPathModel(self):
+		task = TaskPath.objects.filter(taskgivenID__startswith = self.TASK_TYPE)
+		print(len(task))
+		if(len(task) != 0):
+			print("Dataset exist")
+			return 
 		for i in range(self.TOTAL_DATA_LENGTH):
 			TaskPath.objects.create(taskgivenID = self.TASK_TYPE + str(self.pathIDSet[i][0]).zfill(6),
 				taskPath = os.path.join(self.DATAPATH, str(self.pathIDSet[i][1])),)

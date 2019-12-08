@@ -14,14 +14,13 @@ from distributor.distributor_system import DistributorSystem
 
 import json
 
-TASK_TYPE = 'IMGAA'
-
 class getTask(APIView):
     """View for user task distribution that deals with images"""
 
     queryset = TaskPath.objects.all()
     permission_classes = [IsAuthenticated]
 
+    TASK_TYPE = DS.TASK_TYPE
     def get(self, request, pk):
         DS = DistributorSystem()
         if(DS.CURRENT_ITERATION == 0):
@@ -34,7 +33,7 @@ class getTask(APIView):
         if(nextID == None):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        taskpath = TaskPath.objects.get(taskgivenID = 'IMGAA' + str(nextID).zfill(6))
+        taskpath = TaskPath.objects.get(taskgivenID = TASK_TYPE + str(nextID).zfill(6))
         taskserialize = TaskPathSerializer(taskpath)
         DS.printQueue()
         return Response(taskserialize.data, status=status.HTTP_200_OK)
