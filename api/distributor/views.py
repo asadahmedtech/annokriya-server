@@ -20,9 +20,9 @@ class getTask(APIView):
     queryset = TaskPath.objects.all()
     permission_classes = [IsAuthenticated]
 
-    TASK_TYPE = DS.TASK_TYPE
     def get(self, request, pk):
         DS = DistributorSystem()
+        TASK_TYPE = DS.TASK_TYPE
         if(DS.CURRENT_ITERATION == 0):
             DS.createPathIDSet()
             DS.createQueue()
