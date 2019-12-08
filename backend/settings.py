@@ -91,15 +91,18 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'DATABASE_FROM_HEROKU',
-        'USER': 'USERNAME_FROM_HEROKU',
-        'PASSWORD': 'PASSWORD_FROM_HEROKU',
-        'DATABASE_URL': 'postgres://rqpsoitnxwbqxo:e0b08ddc85b6c6d90846154e952a10bebd5b96b38153345af878dd5b38766c6e@ec2-54-243-241-62.compute-1.amazonaws.com:5432/d9s4n17li2stlr'
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'DATABASE_FROM_HEROKU',
+#         'USER': 'USERNAME_FROM_HEROKU',
+#         'PASSWORD': 'PASSWORD_FROM_HEROKU',
+#         'DATABASE_URL': 'postgres://rqpsoitnxwbqxo:e0b08ddc85b6c6d90846154e952a10bebd5b96b38153345af878dd5b38766c6e@ec2-54-243-241-62.compute-1.amazonaws.com:5432/d9s4n17li2stlr'
+#     }
+# }
+import dj_database_url 
+prod_db  =  dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
 
 AUTH_USER_MODEL = 'authentication.User'
 # ACCOUNT_USER_MODEL_USERNAME_FIELD = 'em'
