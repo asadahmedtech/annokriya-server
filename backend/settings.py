@@ -190,8 +190,8 @@ STATICFILES_DIRS = (
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_ROOT = 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = 'media'
 MEDIA_URL = '/media/'
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -211,10 +211,4 @@ CELERY_TIMEZONE = 'Africa/Nairobi'
 
 django_heroku.settings(locals())
 
-DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
-DROPBOX_APP_KEY = "b21hiakdrcrnyib"
-DROPBOX_APP_SECRET_KEY = "2yiv96he5mzn72d"
-DROPBOX_APP_ACCESS_TOKEN = "Hc_cvq9OyAAAAAAAAAAAdwOzdRNa3wb4WvYF5L1R8TqQOKe_AGwZeieUGhs_49NE"
-DROPBOX_APP_ACCESS_TOKEN_SECRET = ""
-DROPBOX_OAUTH2_TOKEN = "Hc_cvq9OyAAAAAAAAAAAdwOzdRNa3wb4WvYF5L1R8TqQOKe_AGwZeieUGhs_49NE"
 
