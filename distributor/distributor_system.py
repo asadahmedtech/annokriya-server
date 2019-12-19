@@ -15,7 +15,7 @@ class DistributorSystem(object):
 	
 	MAX_QUEUELEN = 4
 	THRESHOLD_QUEUELEN = MAX_QUEUELEN / 2
-	TASK_TYPE = 'IMGAAA'
+	TASK_TYPE = 'IMGDROPBOX'
 
 	#Constants This won't change
 	pathIDSet = []
