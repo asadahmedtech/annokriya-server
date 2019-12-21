@@ -18,7 +18,7 @@ class getTask(APIView):
     """View for user task distribution that deals with images"""
 
     queryset = TaskPath.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get(self, request, pk):
         DS = DistributorSystem()
@@ -44,7 +44,7 @@ class postTask(APIView):
     queryset = TaskProcessedData.objects.all()
     serializer_class = TaskProcessedDataSerializer
 
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     def post(self, request, *args, **kwargs):
         serializer = TaskProcessedDataSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
@@ -57,7 +57,7 @@ class getTaskBoundingBox(APIView):
     """View for user task distribution that deals with images"""
 
     queryset = TaskPathBoundingBox.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get(self, request, pk):
         DSBB = DistributorSystemBoundingBox()
@@ -84,7 +84,7 @@ class postTaskBoundingBox(APIView):
     queryset = TaskProcessedDataBoundingBox.objects.all()
     serializer_class = TaskProcessedDataBoundingBoxSerializer
 
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     def post(self, request, *args, **kwargs):
         print(request.data)
         print("\nposting\n")
