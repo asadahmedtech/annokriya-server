@@ -36,7 +36,7 @@ class UserSignUpView(APIView):
                 # user.set_password
                 print(serializer.data)
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
-
+    
 
 class UserUpdateProfile(APIView):
     """View for user to update their profile"""

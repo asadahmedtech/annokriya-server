@@ -17,3 +17,11 @@ class OutputTable(models.Model):
     otaskpath=models.ImageField(upload_to=None)
     otaskid=models.CharField(max_length=255,primary_key=True)
     #otaskpath=models.CharField(max_length=255)
+
+class BoundingBoxObject(models.Model):
+    x=models.CharField(max_length=255)
+    y=models.CharField(max_length=255)
+    l=models.CharField(max_length=255)
+    h=models.CharField(max_length=255)
+    taskid=models.CharField(max_length=255)
+    # taskcode=models.CharField(max_length=255)

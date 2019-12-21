@@ -1,21 +1,23 @@
 from queue import Queue
 import os
 
-from .models import TaskPath
+from .models import TaskPath, TaskPathBoundingBox
+
+from backend import params 
 
 class DistributorSystem(object):
 
 	#TO CHANGE WHENEVER CREATING AN INSTANCE OF THIS METHOD
 	#CANNOT SCALE, JUST TO MAKE IT WORK
-	VALID = 2
+	VALID = params.VALID
 	# DATAPATH = 'C:/Users/DELL/Desktop/AnnoKriya-master/backend/distributor/distributor_system_test/'
 	# DATAPATH = '/Users/asad/Code/AnnoKriya/backend/distributor/distributor_system_test_img/'
 	IMG_BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 	DATAPATH = os.path.join(IMG_BASE_DIR, 'distributor_system_test_img')
 	
-	MAX_QUEUELEN = 4
-	THRESHOLD_QUEUELEN = MAX_QUEUELEN / 2
-	TASK_TYPE = 'IMGAAA'
+	MAX_QUEUELEN = params.MAX_QUEUELEN
+	THRESHOLD_QUEUELEN = params.THRESHOLD_QUEUELEN
+	TASK_TYPE = params.TASK_TYPE
 
 	#Constants This won't change
 	pathIDSet = []
@@ -102,8 +104,118 @@ class DistributorSystem(object):
 		print('Dataset Created')
 
 
-if __name__ == '__main__':
+class DistributorSystemBoundingBox(object):
 
+	#TO CHANGE WHENEVER CREATING AN INSTANCE OF THIS METHOD
+	#CANNOT SCALE, JUST TO MAKE IT WORK
+	VALID = params.VALID
+	# DATAPATH = 'C:/Users/DELL/Desktop/AnnoKriya-master/backend/distributor/distributor_system_test/'
+	# DATAPATH = '/Users/asad/Code/AnnoKriya/backend/distributor/distributor_system_test_img/'
+	IMG_BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+	DATAPATH = os.path.join(IMG_BASE_DIR, 'distributor_system_test_img')
+
+	MAX_QUEUELEN = params.MAX_QUEUELEN
+	THRESHOLD_QUEUELEN = params.THRESHOLD_QUEUELEN
+	TASK_TYPE = params.TASK_TYPE
+
+	#Constants This won't change
+	pathIDSet = []
+	Qlist = []
+	CURRENT_DATA_COUNT = -1
+	TOTAL_DATA_LENGTH = 0
+	CURRENT_ITERATION = 0
+	CURRENT_POS = 0
+	START_QUEUE_NUMBER = 1
+
+	DB_CREATED = False
+
+	# def createPathIDSet(self):
+	# 	files = list(os.listdir(DistributorSystemBoundingBox.DATAPATH))
+	# 	files = [(i+1, files[i]) for i in range(len(files))]
+	# 	DistributorSystemBoundingBox.pathIDSet = files
+	# 	DistributorSystemBoundingBox.TOTAL_DATA_LENGTH = len(files)
+		# print(DistributorSystem.pathIDSet)
+
+	def createQueue(self):
+		for i in range(DistributorSystemBoundingBox.VALID):
+			DistributorSystemBoundingBox.Qlist.append(Queue(maxsize = DistributorSystemBoundingBox.MAX_QUEUELEN))
+		for i in range(DistributorSystemBoundingBox.MAX_QUEUELEN):
+			DistributorSystemBoundingBox.Qlist[0].put(DistributorSystemBoundingBox.pathIDSet[i])
+		DistributorSystemBoundingBox.CURRENT_ITERATION += self.MAX_QUEUELEN
+
+		for i in range(DistributorSystemBoundingBox.VALID-1,0,-1):
+			if(DistributorSystemBoundingBox.Qlist[i].empty() !=True):
+				DistributorSystemBoundingBox.Qlist[i].get()
+
+	def refillQueue(self, size):
+		for i in range(self.CURRENT_DATA_COUNT, self.CURRENT_DATA_COUNT + size):
+			if(i<DistributorSystemBoundingBox.TOTAL_DATA_LENGTH):
+				DistributorSystemBoundingBox.Qlist[0].put(DistributorSystemBoundingBox.pathIDSet[i])
+		DistributorSystemBoundingBox.CURRENT_ITERATION += 1
+
+	def checkQueueStatus(self):
+		empty_slots = self.MAX_QUEUELEN - self.Qlist[0].size()
+		if(empty_slots < self.THRESHOLD_QUEUELEN and CURRENT_DATA_COUNT < TOTAL_DATA_LENGTH):
+			self.refillQueue(self.MAX_QUEUELEN)
+
+	def get_next_ID(self, prevID):
+		# if(DistributorSystem.Qlist[0].empty()):
+		# 	size = min(self.TOTAL_DATA_LENGTH-self.CURRENT_DATA_COUNT, self.MAX_QUEUELEN)
+		# 	self.refillQueue(size=self.MAX_QUEUELEN)
+		flag=1;
+		for i in range(DistributorSystemBoundingBox.VALID-1, -1, -1):
+			print(i)
+			if(DistributorSystemBoundingBox.Qlist[i].empty() != True and DistributorSystemBoundingBox.Qlist[i].queue[0] > prevID):
+				flag=0;
+				break
+		if(flag):
+			#return None
+			# print("yes")
+			#break
+			DistributorSystemBoundingBox.CURRENT_DATA_COUNT+=1
+			if(DistributorSystemBoundingBox.CURRENT_DATA_COUNT<DistributorSystemBoundingBox.TOTAL_DATA_LENGTH):
+				self.refillQueue(size=self.MAX_QUEUELEN)
+				pathID=DistributorSystemBoundingBox.Qlist[0].get()
+				DistributorSystemBoundingBox.Qlist[i+1].put(pathID)
+				return(pathID)
+			return None
+		pathID = DistributorSystemBoundingBox.Qlist[i].get()
+		if(i!=DistributorSystemBoundingBox.VALID-1):
+			if(i==0):
+				DistributorSystemBoundingBox.CURRENT_DATA_COUNT+=1
+			DistributorSystemBoundingBox.Qlist[i+1].put(pathID)
+		return(pathID)
+
+	def printQueue(self):
+		for i in range(DistributorSystemBoundingBox.VALID):
+			print(DistributorSystemBoundingBox.Qlist[i].queue)
+
+	def populateTaskPathBoundingBoxModel(self):
+		task = TaskPathBoundingBox.objects.filter(bb_taskgivenID__startswith = self.TASK_TYPE)
+		if(len(task) != 0):
+			print("Dataset exist")
+			print(int(str(list(task)[0])[-6:]))
+			for i in list(task):
+				DistributorSystemBoundingBox.pathIDSet.append(int(str(i)[-6:]))
+			DistributorSystemBoundingBox.pathIDSet.sort()
+			DistributorSystemBoundingBox.START_QUEUE_NUMBER = int(str(list(task)[0])[-6:])
+			return
+
+		files = list(os.listdir(DistributorSystemBoundingBox.DATAPATH))
+
+		files = [(i+1, files[i]) for i in range(len(files))]
+		DistributorSystemBoundingBox.pathIDSet = files
+		DistributorSystemBoundingBox.TOTAL_DATA_LENGTH = len(files)
+
+		for i in range(self.TOTAL_DATA_LENGTH):
+			TaskPathBoundingBox.objects.create(bb_taskgivenID = self.TASK_TYPE + str(self.pathIDSet[i][0]).zfill(6),
+				bb_taskPath = os.path.join(self.DATAPATH, str(self.pathIDSet[i][1])),)
+		DistributorSystemBoundingBox.DB_CREATED = True
+		print('Dataset Created')
+
+
+if __name__ == '__main__':
+	
 	obj1 = DistributorSystem()
 	obj1.createPathIDSet()
 	obj1.createQueue()

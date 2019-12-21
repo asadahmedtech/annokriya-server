@@ -8,4 +8,6 @@ from . import views as v
 urlpatterns = [
     path('',v.callMerger),
     path('print_db/',v.callPrinter),
+    path('bounding-box/',v.callMergerBoundingBox),
+    path('bounding-box/print_db/',v.callPrinterBoundingBox),
 ]

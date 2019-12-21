@@ -33,3 +33,25 @@ class TaskProcessedData(models.Model):
 
     def __str__(self):
     	return "{}-{}".format(str(self.taskpath), self.user.pk)
+
+
+class TaskPathBoundingBox(models.Model):
+    bb_taskgivenID = models.CharField(max_length=255, primary_key=True)
+    # taskPath = models.CharField(max_length=255)
+    bb_taskPath = models.ImageField(upload_to='post_images')
+    bb_taskCount = models.IntegerField(default = 0)
+
+    def __str__(self):
+        return "{}".format(self.bb_taskgivenID)
+
+class TaskProcessedDataBoundingBox(models.Model):
+    bb_taskpath = models.ForeignKey(TaskPathBoundingBox, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    x=models.CharField(max_length=255)
+    y=models.CharField(max_length=255)
+    l=models.CharField(max_length=255)
+    h=models.CharField(max_length=255)
+
+    def __str__(self):
+        return "{}-{}".format(str(self.bb_taskpath), self.user.pk)
