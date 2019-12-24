@@ -72,3 +72,17 @@ class UserLogin(APIView):
             login(request, user)
             return Response(status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+class LoginAPI(APIView):
+    serializer_class = LoginUserSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = LoginUserSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data
+        return Response({
+            "user": UserSerializer(user, context=serializer.data),
+            "token": AuthToken.objects.create(user)[1]
+
+
+        })

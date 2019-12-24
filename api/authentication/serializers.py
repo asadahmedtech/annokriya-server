@@ -2,6 +2,9 @@ from rest_framework import serializers
 from authentication.models import User, UserProfile
 from dashboard.models import Dashboard
 
+from knox.models import AuthToken
+
+
 class UserProfileSerializer(serializers.ModelSerializer):
     
     class Meta:
@@ -75,3 +78,23 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         UserProfile.save()
 
         return instance
+
+
+from django.contrib.auth import authenticate
+
+
+class LoginUserSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
+
+    def validate(self, data):
+        user = authenticate(**data)
+        if user and user.is_active:
+            return user
+        raise serializers.ValidationError("Unable to log in with provided credentials.")
+
+class UserSerializer(serializers.Serializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username')
+

@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     # 'background_task',
     'dashboard',
     'merger',
-    'storages'
+    'storages',
+    'knox'
 ]
 
 MIDDLEWARE = [
@@ -130,16 +131,22 @@ AUTH_USER_MODEL = 'authentication.User'
 # ACCOUNT_USER_EMAIL_FIELD = 'email'
 # ACCOUNT_LOGOUT_ON_GET = True
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAuthenticated',
+#     ),
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+#         'rest_framework.authentication.SessionAuthentication',
+#         'rest_framework.authentication.BasicAuthentication',
+#     ),
+# }
+
+
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
 }
+
 
 REST_USE_JWT = True
 
