@@ -44,7 +44,7 @@ class postTask(APIView):
     queryset = TaskProcessedData.objects.all()
     serializer_class = TaskProcessedDataSerializer
 
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         serializer = TaskProcessedDataSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
@@ -84,7 +84,7 @@ class postTaskBoundingBox(APIView):
     queryset = TaskProcessedDataBoundingBox.objects.all()
     serializer_class = TaskProcessedDataBoundingBoxSerializer
 
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         print(request.data)
         print("\nposting\n")
