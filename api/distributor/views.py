@@ -9,7 +9,7 @@ from .permissions import IsLoggedInUserOrAdmin, IsAdminUser
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
-
+from rest_framework.authentication import TokenAuthentication, JWTAuthentication
 from distributor.distributor_system import DistributorSystem, DistributorSystemBoundingBox
 
 import json
@@ -83,7 +83,7 @@ class postTaskBoundingBox(APIView):
 
     queryset = TaskProcessedDataBoundingBox.objects.all()
     serializer_class = TaskProcessedDataBoundingBoxSerializer
-
+    authentication_classes = [TokenAuthentication, JWTAuthentication]
     permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         print(request.data)
