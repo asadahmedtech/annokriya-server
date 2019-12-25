@@ -83,7 +83,7 @@ class postTaskBoundingBox(APIView):
 
     queryset = TaskProcessedDataBoundingBox.objects.all()
     serializer_class = TaskProcessedDataBoundingBoxSerializer
-    authentication_classes = [TokenAuthentication]
+    # authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         print(request.data)
