@@ -3,7 +3,7 @@ import os
 VALID = 5
 MAX_QUEUELEN = 10
 THRESHOLD_QUEUELEN = MAX_QUEUELEN / 2
-TASK_TYPE = 'IMGAAA'
+TASK_TYPE = 'IMGTest'
 
 IMG_BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
