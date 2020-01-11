@@ -33,6 +33,7 @@ urlpatterns = [
 
     url(r'^add_to_db/', include('merger.urls')),
     path('dashboard/',include('dashboard.urls')),
+    path('fileupload/',include('fileupload.urls')),
 ]
 
 # distributorStatus(repeat=10, repeat_untill=None)
