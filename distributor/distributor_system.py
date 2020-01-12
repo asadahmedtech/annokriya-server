@@ -140,7 +140,7 @@ class DistributorSystemBoundingBox(object):
 	def createQueue(self):
 		for i in range(DistributorSystemBoundingBox.VALID):
 			DistributorSystemBoundingBox.Qlist.append(Queue(maxsize = DistributorSystemBoundingBox.MAX_QUEUELEN))
-		queuesize = max(DistributorSystemBoundingBox.MAX_QUEUELEN, len(DistributorSystemBoundingBox.pathIDSet))
+		queuesize = min(DistributorSystemBoundingBox.MAX_QUEUELEN, len(DistributorSystemBoundingBox.pathIDSet))
 		for i in range(queuesize):
 			DistributorSystemBoundingBox.Qlist[0].put(DistributorSystemBoundingBox.pathIDSet[i])
 		DistributorSystemBoundingBox.CURRENT_ITERATION += queuesize
