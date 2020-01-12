@@ -202,7 +202,7 @@ class DistributorSystemBoundingBox(object):
 				DistributorSystemBoundingBox.pathIDSet.append(int(str(i)[-6:]))
 			DistributorSystemBoundingBox.pathIDSet.sort()
 			print(DistributorSystemBoundingBox.pathIDSet)
-			DistributorSystemBoundingBox.START_QUEUE_NUMBER = int(str(list(task)[0])[-6:])1
+			DistributorSystemBoundingBox.START_QUEUE_NUMBER = int(str(list(task)[0])[-6:])
 			return
 
 		import boto3
