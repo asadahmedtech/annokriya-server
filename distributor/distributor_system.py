@@ -206,8 +206,8 @@ class DistributorSystemBoundingBox(object):
 		import boto3
 		_BUCKET_NAME = 'annokriya-assets'
 		_PREFIX = 'pilot_test1/'
-		client = boto3.client('s3', aws_access_key_id=settings.ACCESS_KEY,
-                            aws_secret_access_key=settings.SECRET_KEY)
+		client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
 		def ListFiles(client):
 			"""List files in specific S3 URL"""
 			response = client.list_objects(Bucket=_BUCKET_NAME, Prefix=_PREFIX)
