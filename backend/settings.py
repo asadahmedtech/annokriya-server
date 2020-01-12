@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 AWS_ACCESS_KEY_ID = 'AKIATM2X33VTPIJCHEBL'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'annokriya-assets'
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.ap-south-1.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
