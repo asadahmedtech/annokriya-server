@@ -8,8 +8,8 @@ from django.contrib.auth.models import BaseUserManager
 
 class TaskPath(models.Model):
     taskgivenID = models.CharField(max_length=255, primary_key=True)
-    # taskPath = models.CharField(max_length=255)
-    taskPath = models.ImageField(upload_to='post_images')
+    taskPath = models.CharField(max_length=2000)
+    # taskPath = models.ImageField(upload_to='post_images')
     taskCount = models.IntegerField(default = 0)
 
     def __str__(self):
@@ -37,8 +37,8 @@ class TaskProcessedData(models.Model):
 
 class TaskPathBoundingBox(models.Model):
     bb_taskgivenID = models.CharField(max_length=255, primary_key=True)
-    # taskPath = models.CharField(max_length=255)
-    bb_taskPath = models.ImageField(upload_to='post_images')
+    bb_taskPath = models.CharField(max_length=2550)
+    # bb_taskPath = models.ImageField(upload_to='post_images')
     bb_taskCount = models.IntegerField(default = 0)
 
     def __str__(self):
