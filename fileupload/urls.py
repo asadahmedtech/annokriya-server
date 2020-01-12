@@ -4,5 +4,5 @@ from django.conf.urls import url, include
 from . import views as v
 
 urlpatterns = [
-    path('',v.DocumentCreateView.as_view(),name='home'),
+    path('',v.image_upload,name='upload'),
 ]
