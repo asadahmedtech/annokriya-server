@@ -72,14 +72,16 @@ class getTaskBoundingBox(APIView):
             DSBB.createQueue()
             print("after create queue call")
             
-
+        print("getting next id")
         nextID = DSBB.get_next_ID(prevID = pk)
         if(nextID == None):
             return Response(status=status.HTTP_404_NOT_FOUND)
-
+        print(nextID)
+        print("is the next id")
         bb_taskpath = TaskPathBoundingBox.objects.get(bb_taskgivenID = TASK_TYPE + str(nextID).zfill(6))
         taskserialize = TaskPathBoundingBoxSerializer(bb_taskpath)
         DSBB.printQueue()
+        print("queue is printed")
         return Response(taskserialize.data, status=status.HTTP_200_OK)
 
 class postTaskBoundingBox(APIView):

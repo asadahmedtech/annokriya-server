@@ -167,7 +167,9 @@ class DistributorSystemBoundingBox(object):
 		flag=1;
 		for i in range(DistributorSystemBoundingBox.VALID-1, -1, -1):
 			print(i)
+			print("is value of i")
 			print(prevID)
+			print("is value of prevID")
 			if(DistributorSystemBoundingBox.Qlist[i].empty() != True and DistributorSystemBoundingBox.Qlist[i].queue[0] > prevID):
 				flag=0;
 				break
@@ -177,9 +179,13 @@ class DistributorSystemBoundingBox(object):
 			#break
 			DistributorSystemBoundingBox.CURRENT_DATA_COUNT+=1
 			if(DistributorSystemBoundingBox.CURRENT_DATA_COUNT<DistributorSystemBoundingBox.TOTAL_DATA_LENGTH):
+				print("before refilling queue")
 				self.refillQueue(size=self.MAX_QUEUELEN)
+				print("after refilling queue")
 				pathID=DistributorSystemBoundingBox.Qlist[0].get()
 				DistributorSystemBoundingBox.Qlist[i+1].put(pathID)
+				print("printing pathID")
+				print(pathID)
 				return(pathID)
 			return None
 		pathID = DistributorSystemBoundingBox.Qlist[i].get()
@@ -187,6 +193,8 @@ class DistributorSystemBoundingBox(object):
 			if(i==0):
 				DistributorSystemBoundingBox.CURRENT_DATA_COUNT+=1
 			DistributorSystemBoundingBox.Qlist[i+1].put(pathID)
+		print("returning path id equal to")
+		print(pathID)
 		return(pathID)
 
 	def printQueue(self):
