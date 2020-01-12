@@ -209,8 +209,8 @@ class DistributorSystemBoundingBox(object):
 		bucket = conn.get_bucket('annokriya-assets')
 
 		for key in bucket.list():
-		    print key.name
-
+		    print(key.name)
+		
 		files = list(os.listdir(DistributorSystemBoundingBox.DATAPATH))
 
 		files = [(i+1, files[i]) for i in range(len(files))]
