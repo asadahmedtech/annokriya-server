@@ -5,7 +5,6 @@ from .models import TaskPath, TaskPathBoundingBox
 
 from backend import params 
 from backend import settings
-from fileupload.models import Upload
 class DistributorSystem(object):
 
 	#TO CHANGE WHENEVER CREATING AN INSTANCE OF THIS METHOD
@@ -204,6 +203,16 @@ class DistributorSystemBoundingBox(object):
 			DistributorSystemBoundingBox.START_QUEUE_NUMBER = int(str(list(task)[0])[-6:])
 			return
 
+		from boto.s3.connection import S3Connection
+
+		conn = S3Connection(settings.AWS_ACCESS_KEY_ID,settings.AWS_SECRET_ACCESS_KEY)
+		bucket = conn.get_bucket('annokriya-assets')
+
+		for key in bucket.list('pilot_test1'):
+		    print(key.name)
+		    print(key)
+		    print(key.url)
+
 		files = list(os.listdir(DistributorSystemBoundingBox.DATAPATH))
 
 		files = [(i+1, files[i]) for i in range(len(files))]
@@ -211,12 +220,8 @@ class DistributorSystemBoundingBox(object):
 		DistributorSystemBoundingBox.TOTAL_DATA_LENGTH = len(files)
 
 		for i in range(self.TOTAL_DATA_LENGTH):
-			image_file =  os.path.join(self.DATAPATH, str(self.pathIDSet[i][1]))
-			upload = Upload(file=image_file)
-			upload.save()
-			image_url = upload.file.url
 			TaskPathBoundingBox.objects.create(bb_taskgivenID = self.TASK_TYPE + str(self.pathIDSet[i][0]).zfill(6),
-				bb_taskPath = image_url)
+				bb_taskPath = os.path.join(self.DATAPATH, str(self.pathIDSet[i][1])),)
 		DistributorSystemBoundingBox.DB_CREATED = True
 		print('Dataset Created')
 
