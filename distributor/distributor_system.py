@@ -166,6 +166,7 @@ class DistributorSystemBoundingBox(object):
 		flag=1;
 		for i in range(DistributorSystemBoundingBox.VALID-1, -1, -1):
 			print(i)
+			print(prevID)
 			if(DistributorSystemBoundingBox.Qlist[i].empty() != True and DistributorSystemBoundingBox.Qlist[i].queue[0] > prevID):
 				flag=0;
 				break
