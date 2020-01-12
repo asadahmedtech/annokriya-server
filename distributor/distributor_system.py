@@ -217,7 +217,7 @@ class DistributorSystemBoundingBox(object):
 				yield content.get('Key')
 		file_list = ListFiles(client)
 		for file in file_list:
-			image_url = settings.AWS_S3_CUSTOM_DOMAIN + "/" + str(file)
+			image_url = "https://" + settings.AWS_S3_CUSTOM_DOMAIN + "/" + str(file)
 			files.append(image_url)
 
 		# files = list(os.listdir(DistributorSystemBoundingBox.DATAPATH))
