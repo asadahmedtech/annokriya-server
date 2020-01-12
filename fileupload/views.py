@@ -11,12 +11,12 @@ def image_upload(request):
         image_type = request.POST['image_type']
         if settings.USE_S3:
         	print("hi")
-            upload = Upload(file=image_file)
-            print("hello")
-            print(upload.file)
-            upload.save()
-            print("saved")
-            image_url = upload.file.url
+        	upload = Upload(file=image_file)
+        	print("hello")
+        	print(upload.file)
+        	upload.save()
+        	print("saved")
+        	image_url = upload.file.url
         else:
             fs = FileSystemStorage()
             filename = fs.save(image_file.name, image_file)
