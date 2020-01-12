@@ -243,11 +243,11 @@ class DistributorSystemBoundingBox(object):
 			"""List files in specific S3 URL"""
 			response = client.list_objects(Bucket=_BUCKET_NAME, Prefix=_PREFIX)
 			for content in response.get('Contents', []):
-				print(content)
+				# print(content)
 				yield content.get('Key')
 		file_list = ListFiles(client)
 		for file in file_list:
-			print(file.split('/'))
+			# print(file.split('/'))
 			if('' not in str(file).split('/')):
 				files.append("https://" + settings.AWS_S3_CUSTOM_DOMAIN + "/" + str(file))
 
@@ -261,6 +261,8 @@ class DistributorSystemBoundingBox(object):
 		DistributorSystemBoundingBox.TOTAL_DATA_LENGTH = len(files)
 
 		for i in range(self.TOTAL_DATA_LENGTH):
+			print(str(self.pathIDSet[i][1]).split('/')+"hihih")
+			print(str(self.pathIDSet[i][1]).split('/')[-2])
 			TaskPathBoundingBox.objects.create(bb_taskgivenID = self.TASK_TYPE + str(self.pathIDSet[i][0]).zfill(6),
 				bb_taskPath = str(self.pathIDSet[i][1]), bb_taskTag = str(self.pathIDSet[i][1]).split('/')[-2])
 		DistributorSystemBoundingBox.DB_CREATED = True
