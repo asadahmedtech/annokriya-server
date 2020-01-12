@@ -144,6 +144,9 @@ class DistributorSystemBoundingBox(object):
 		for i in range(queuesize):
 			DistributorSystemBoundingBox.Qlist[0].put(DistributorSystemBoundingBox.pathIDSet[i])
 		DistributorSystemBoundingBox.CURRENT_ITERATION += queuesize
+		print("\n\ncurrent iteration value is")
+		print(DistributorSystemBoundingBox.CURRENT_ITERATION)
+		print("\n\n")
 
 		for i in range(DistributorSystemBoundingBox.VALID-1,0,-1):
 			if(DistributorSystemBoundingBox.Qlist[i].empty() !=True):
