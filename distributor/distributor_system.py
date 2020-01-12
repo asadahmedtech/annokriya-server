@@ -41,7 +41,7 @@ class DistributorSystem(object):
 		for i in range(DistributorSystem.VALID):
 			DistributorSystem.Qlist.append(Queue(maxsize = DistributorSystem.MAX_QUEUELEN))
 		for i in range(DistributorSystem.MAX_QUEUELEN):
-			DistributorSystem.Qlist[0].put(DistributorSystem.pathIDSet[i][0])
+			DistributorSystem.Qlist[0].put(DistributorSystem.pathIDSet[i])
 		DistributorSystem.CURRENT_ITERATION += self.MAX_QUEUELEN
 
 		for i in range(DistributorSystem.VALID-1,0,-1):
@@ -51,7 +51,7 @@ class DistributorSystem(object):
 	def refillQueue(self, size):
 		for i in range(self.CURRENT_DATA_COUNT, self.CURRENT_DATA_COUNT + size):
 			if(i<DistributorSystem.TOTAL_DATA_LENGTH):
-				DistributorSystem.Qlist[0].put(DistributorSystem.pathIDSet[i][0])
+				DistributorSystem.Qlist[0].put(DistributorSystem.pathIDSet[i])
 		DistributorSystem.CURRENT_ITERATION += 1
 
 	def checkQueueStatus(self):
