@@ -171,8 +171,8 @@ class DistributorSystemBoundingBox(object):
 				flag=0;
 				break
 		if(flag):
-			#return None
-			# print("yes")
+			# return None
+			print("yes")
 			#break
 			DistributorSystemBoundingBox.CURRENT_DATA_COUNT+=1
 			if(DistributorSystemBoundingBox.CURRENT_DATA_COUNT<DistributorSystemBoundingBox.TOTAL_DATA_LENGTH):
