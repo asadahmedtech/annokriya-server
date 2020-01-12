@@ -170,6 +170,8 @@ class DistributorSystemBoundingBox(object):
 			print("is value of i")
 			print(prevID)
 			print("is value of prevID")
+			if(DistributorSystemBoundingBox.Qlist[i].empty()!=True):
+				print(DistributorSystemBoundingBox.Qlist[i].queue[0])
 			if(DistributorSystemBoundingBox.Qlist[i].empty() != True and DistributorSystemBoundingBox.Qlist[i].queue[0] > prevID):
 				flag=0;
 				break
