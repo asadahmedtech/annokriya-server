@@ -203,15 +203,19 @@ class DistributorSystemBoundingBox(object):
 			DistributorSystemBoundingBox.START_QUEUE_NUMBER = int(str(list(task)[0])[-6:])
 			return
 
-		from boto.s3.connection import S3Connection
-
-		conn = S3Connection(settings.AWS_ACCESS_KEY_ID,settings.AWS_SECRET_ACCESS_KEY)
-		bucket = conn.get_bucket('annokriya-assets')
-
-		for key in bucket.list('pilot_test1'):
-		    print(key.name)
-		    print(key)
-		    print(key.url)
+		import boto3
+		_BUCKET_NAME = 'annokriya-assets'
+		_PREFIX = 'pilot_test1/'
+		client = boto3.client('s3', aws_access_key_id=settings.ACCESS_KEY,
+                            aws_secret_access_key=settings.SECRET_KEY)
+		def ListFiles(client):
+			"""List files in specific S3 URL"""
+			response = client.list_objects(Bucket=_BUCKET_NAME, Prefix=_PREFIX)
+			for content in response.get('Contents', []):
+				yield content.get('Key')
+		file_list = ListFiles(client)
+		for file in file_list:
+			print('File found: %s' % file)
 
 		files = list(os.listdir(DistributorSystemBoundingBox.DATAPATH))
 
