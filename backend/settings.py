@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'merger',
     'storages',
     'knox',
-    'fileupload'
+    'fileupload',
 ]
 
 MIDDLEWARE = [
