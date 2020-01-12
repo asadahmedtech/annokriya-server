@@ -206,6 +206,7 @@ class DistributorSystemBoundingBox(object):
 		import boto3
 		_BUCKET_NAME = 'annokriya-assets'
 		_PREFIX = 'pilot_test1/'
+		files = []
 		client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
                             aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
 		def ListFiles(client):
@@ -215,9 +216,10 @@ class DistributorSystemBoundingBox(object):
 				yield content.get('Key')
 		file_list = ListFiles(client)
 		for file in file_list:
-			print('File found: %s' % file)
+			image_url = settings.AWS_S3_CUSTOM_DOMAIN + "/" + str(file)
+			files.append(image_url)
 
-		files = list(os.listdir(DistributorSystemBoundingBox.DATAPATH))
+		# files = list(os.listdir(DistributorSystemBoundingBox.DATAPATH))
 
 		files = [(i+1, files[i]) for i in range(len(files))]
 		DistributorSystemBoundingBox.pathIDSet = files
@@ -225,7 +227,7 @@ class DistributorSystemBoundingBox(object):
 
 		for i in range(self.TOTAL_DATA_LENGTH):
 			TaskPathBoundingBox.objects.create(bb_taskgivenID = self.TASK_TYPE + str(self.pathIDSet[i][0]).zfill(6),
-				bb_taskPath = os.path.join(self.DATAPATH, str(self.pathIDSet[i][1])),)
+				bb_taskPath = str(self.pathIDSet[i][1]),)
 		DistributorSystemBoundingBox.DB_CREATED = True
 		print('Dataset Created')
 
