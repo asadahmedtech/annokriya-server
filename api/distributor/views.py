@@ -64,9 +64,13 @@ class getTaskBoundingBox(APIView):
         TASK_TYPE = DSBB.TASK_TYPE
         if(DSBB.CURRENT_ITERATION == 0):
             if(DSBB.DB_CREATED == False):
+                print("before populate called")
                 DSBB.populateTaskPathBoundingBoxModel()
+                print("after populated called")
             # DSBB.createPathIDSet()
+            print("before create queue call" )
             DSBB.createQueue()
+            print("after create queue call")
             
 
         nextID = DSBB.get_next_ID(prevID = pk)

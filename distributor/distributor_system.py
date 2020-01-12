@@ -140,9 +140,10 @@ class DistributorSystemBoundingBox(object):
 	def createQueue(self):
 		for i in range(DistributorSystemBoundingBox.VALID):
 			DistributorSystemBoundingBox.Qlist.append(Queue(maxsize = DistributorSystemBoundingBox.MAX_QUEUELEN))
-		for i in range(DistributorSystemBoundingBox.MAX_QUEUELEN):
+		queuesize = max(DistributorSystemBoundingBox.MAX_QUEUELEN, len(DistributorSystemBoundingBox.pathIDSet))
+		for i in range(queuesize):
 			DistributorSystemBoundingBox.Qlist[0].put(DistributorSystemBoundingBox.pathIDSet[i])
-		DistributorSystemBoundingBox.CURRENT_ITERATION += self.MAX_QUEUELEN
+		DistributorSystemBoundingBox.CURRENT_ITERATION += queuesize
 
 		for i in range(DistributorSystemBoundingBox.VALID-1,0,-1):
 			if(DistributorSystemBoundingBox.Qlist[i].empty() !=True):
@@ -201,7 +202,7 @@ class DistributorSystemBoundingBox(object):
 				DistributorSystemBoundingBox.pathIDSet.append(int(str(i)[-6:]))
 			DistributorSystemBoundingBox.pathIDSet.sort()
 			print(DistributorSystemBoundingBox.pathIDSet)
-			DistributorSystemBoundingBox.START_QUEUE_NUMBER = int(str(list(task)[0])[-6:])
+			DistributorSystemBoundingBox.START_QUEUE_NUMBER = int(str(list(task)[0])[-6:])1
 			return
 
 		import boto3
