@@ -64,6 +64,11 @@ class getTaskBoundingBox(APIView):
         TASK_TYPE = DSBB.TASK_TYPE
         if(DSBB.CURRENT_ITERATION == 0):
             if(DSBB.DB_CREATED == False):
+                import socket    
+                hostname = socket.gethostname()    
+                IPAddr = socket.gethostbyname(hostname)    
+                print("Your Computer Name is:" + hostname)    
+                print("Your Computer IP Address is:" + IPAddr)
                 print("before populate called")
                 DSBB.populateTaskPathBoundingBoxModel()
                 print("after populated called")
