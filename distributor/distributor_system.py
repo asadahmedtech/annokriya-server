@@ -13,6 +13,7 @@ class DistributorSystem(object):
 	# DATAPATH = 'C:/Users/DELL/Desktop/AnnoKriya-master/backend/distributor/distributor_system_test/'
 	# DATAPATH = '/Users/asad/Code/AnnoKriya/backend/distributor/distributor_system_test_img/'
 	IMG_BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+	# IMG_BASE_DIR = 
 	DATAPATH = os.path.join(IMG_BASE_DIR, 'distributor_system_test_img')
 	
 	MAX_QUEUELEN = params.MAX_QUEUELEN
