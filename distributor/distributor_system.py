@@ -142,7 +142,7 @@ class DistributorSystemBoundingBox(object):
 			DistributorSystemBoundingBox.Qlist.append(Queue(maxsize = DistributorSystemBoundingBox.MAX_QUEUELEN))
 		queuesize = min(DistributorSystemBoundingBox.MAX_QUEUELEN, len(DistributorSystemBoundingBox.pathIDSet))
 		for i in range(queuesize):
-			DistributorSystemBoundingBox.Qlist[0].put(DistributorSystemBoundingBox.pathIDSet[i])
+			DistributorSystemBoundingBox.Qlist[0].put(DistributorSystemBoundingBox.pathIDSet[i][0])
 		DistributorSystemBoundingBox.CURRENT_ITERATION += queuesize
 		print("\n\ncurrent iteration value is")
 		print(DistributorSystemBoundingBox.CURRENT_ITERATION)
@@ -159,7 +159,7 @@ class DistributorSystemBoundingBox(object):
 	def refillQueue(self, size):
 		for i in range(self.CURRENT_DATA_COUNT, self.CURRENT_DATA_COUNT + size):
 			if(i<DistributorSystemBoundingBox.TOTAL_DATA_LENGTH):
-				DistributorSystemBoundingBox.Qlist[0].put(DistributorSystemBoundingBox.pathIDSet[i])
+				DistributorSystemBoundingBox.Qlist[0].put(DistributorSystemBoundingBox.pathIDSet[i][0])
 		DistributorSystemBoundingBox.CURRENT_ITERATION += 1
 		print("inside refill queue, the queue created is ")
 		self.printQueue()
@@ -262,7 +262,7 @@ class DistributorSystemBoundingBox(object):
 
 		for i in range(self.TOTAL_DATA_LENGTH):
 			TaskPathBoundingBox.objects.create(bb_taskgivenID = self.TASK_TYPE + str(self.pathIDSet[i][0]).zfill(6),
-				bb_taskPath = str(self.pathIDSet[i][1]), bb_taskTag = str(self.pathIDSet[i][1]).split('/')[1])
+				bb_taskPath = str(self.pathIDSet[i][1]), bb_taskTag = str(self.pathIDSet[i][1]).split('/')[-2])
 		DistributorSystemBoundingBox.DB_CREATED = True
 		print('Dataset Created')
 
