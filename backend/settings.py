@@ -114,22 +114,22 @@ DEFAULT_FILE_STORAGE = 'backend.storage_backends.MediaStorage'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'DATABASE_FROM_HEROKU',
-#         'USER': 'USERNAME_FROM_HEROKU',
-#         'PASSWORD': 'PASSWORD_FROM_HEROKU',
-#         'HOST': 'HOST_FROM_HEROKU'
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'DATABASE_FROM_HEROKU',
+        'USER': 'USERNAME_FROM_HEROKU',
+        'PASSWORD': 'PASSWORD_FROM_HEROKU',
+        'HOST': 'HOST_FROM_HEROKU'
+    }
+}
 # Parse database configuration from $DATABASE_URL
 
 # SECRET_KEY = config('SECRET_KEY')
