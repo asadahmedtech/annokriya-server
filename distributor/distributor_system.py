@@ -235,7 +235,7 @@ class DistributorSystemBoundingBox(object):
 
 		import boto3
 		_BUCKET_NAME = 'annokriya-assets'
-		_PREFIX = 'pilot_test1/'
+		_PREFIX = 'pilot_test2/'
 		files = []
 		client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
                             aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
@@ -243,11 +243,16 @@ class DistributorSystemBoundingBox(object):
 			"""List files in specific S3 URL"""
 			response = client.list_objects(Bucket=_BUCKET_NAME, Prefix=_PREFIX)
 			for content in response.get('Contents', []):
+				print(content)
 				yield content.get('Key')
 		file_list = ListFiles(client)
 		for file in file_list:
-			image_url = "https://" + settings.AWS_S3_CUSTOM_DOMAIN + "/" + str(file)
-			files.append(image_url)
+			print(file.split('/'))
+			if('' not in str(file).split('/')):
+				files.append("https://" + settings.AWS_S3_CUSTOM_DOMAIN + "/" + str(file))
+
+			# image_url = "https://" + settings.AWS_S3_CUSTOM_DOMAIN + "/" + str(file)
+			# files.append(image_url)
 
 		# files = list(os.listdir(DistributorSystemBoundingBox.DATAPATH))
 
@@ -257,7 +262,7 @@ class DistributorSystemBoundingBox(object):
 
 		for i in range(self.TOTAL_DATA_LENGTH):
 			TaskPathBoundingBox.objects.create(bb_taskgivenID = self.TASK_TYPE + str(self.pathIDSet[i][0]).zfill(6),
-				bb_taskPath = str(self.pathIDSet[i][1]),)
+				bb_taskPath = str(self.pathIDSet[i][1]), bb_taskTag = str(self.pathIDSet[i][1]).split('/')[1])
 		DistributorSystemBoundingBox.DB_CREATED = True
 		print('Dataset Created')
 
