@@ -142,7 +142,7 @@ class DistributorSystemBoundingBox(object):
 			DistributorSystemBoundingBox.Qlist.append(Queue(maxsize = DistributorSystemBoundingBox.MAX_QUEUELEN))
 		queuesize = min(DistributorSystemBoundingBox.MAX_QUEUELEN, len(DistributorSystemBoundingBox.pathIDSet))
 		for i in range(queuesize):
-			DistributorSystemBoundingBox.Qlist[0].put(DistributorSystemBoundingBox.pathIDSet[i][0])
+			DistributorSystemBoundingBox.Qlist[0].put(DistributorSystemBoundingBox.pathIDSet[i])
 		DistributorSystemBoundingBox.CURRENT_ITERATION += queuesize
 		print("\n\ncurrent iteration value is")
 		print(DistributorSystemBoundingBox.CURRENT_ITERATION)
@@ -159,7 +159,7 @@ class DistributorSystemBoundingBox(object):
 	def refillQueue(self, size):
 		for i in range(self.CURRENT_DATA_COUNT, self.CURRENT_DATA_COUNT + size):
 			if(i<DistributorSystemBoundingBox.TOTAL_DATA_LENGTH):
-				DistributorSystemBoundingBox.Qlist[0].put(DistributorSystemBoundingBox.pathIDSet[i][0])
+				DistributorSystemBoundingBox.Qlist[0].put(DistributorSystemBoundingBox.pathIDSet[i])
 		DistributorSystemBoundingBox.CURRENT_ITERATION += 1
 		print("inside refill queue, the queue created is ")
 		self.printQueue()
