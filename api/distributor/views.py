@@ -35,9 +35,7 @@ class getTask(APIView):
 
         taskpath = TaskPath.objects.get(taskgivenID = TASK_TYPE + str(nextID).zfill(6))
         taskserialize = TaskPathSerializer(taskpath)
-        print("printing queue in getTask")
         DS.printQueue()
-        print("printed queue in getTask")
         return Response(taskserialize.data, status=status.HTTP_200_OK)
 
 class postTask(APIView):
