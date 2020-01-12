@@ -148,12 +148,19 @@ class DistributorSystemBoundingBox(object):
 		for i in range(DistributorSystemBoundingBox.VALID-1,0,-1):
 			if(DistributorSystemBoundingBox.Qlist[i].empty() !=True):
 				DistributorSystemBoundingBox.Qlist[i].get()
+		print("inside create queue, the queue created is ")
+		self.printQueue()
+		print("end of create queue function")
+
 
 	def refillQueue(self, size):
 		for i in range(self.CURRENT_DATA_COUNT, self.CURRENT_DATA_COUNT + size):
 			if(i<DistributorSystemBoundingBox.TOTAL_DATA_LENGTH):
 				DistributorSystemBoundingBox.Qlist[0].put(DistributorSystemBoundingBox.pathIDSet[i])
 		DistributorSystemBoundingBox.CURRENT_ITERATION += 1
+		print("inside refill queue, the queue created is ")
+		self.printQueue()
+		print("end of refill queue function")
 
 	def checkQueueStatus(self):
 		empty_slots = self.MAX_QUEUELEN - self.Qlist[0].size()
@@ -164,6 +171,9 @@ class DistributorSystemBoundingBox(object):
 		# if(DistributorSystem.Qlist[0].empty()):
 		# 	size = min(self.TOTAL_DATA_LENGTH-self.CURRENT_DATA_COUNT, self.MAX_QUEUELEN)
 		# 	self.refillQueue(size=self.MAX_QUEUELEN)
+		print("getting next id and the queue is as follows")
+		self.printQueue()
+		print("inside func get next id")
 		flag=1;
 		for i in range(DistributorSystemBoundingBox.VALID-1, -1, -1):
 			print(i)
@@ -172,6 +182,7 @@ class DistributorSystemBoundingBox(object):
 			print("is value of prevID")
 			if(DistributorSystemBoundingBox.Qlist[i].empty()!=True):
 				print(DistributorSystemBoundingBox.Qlist[i].queue[0])
+				print(" is front of i'th queue")
 			if(DistributorSystemBoundingBox.Qlist[i].empty() != True and DistributorSystemBoundingBox.Qlist[i].queue[0] > prevID):
 				flag=0;
 				break
@@ -197,6 +208,9 @@ class DistributorSystemBoundingBox(object):
 			DistributorSystemBoundingBox.Qlist[i+1].put(pathID)
 		print("returning path id equal to")
 		print(pathID)
+		print("at end of get next id queue is ")
+		self.printQueue()
+		print("get next id function ended")
 		return(pathID)
 
 	def printQueue(self):
