@@ -4,7 +4,7 @@ import os
 from .models import TaskPath, TaskPathBoundingBox
 
 from backend import params 
-
+from backend import settings
 class DistributorSystem(object):
 
 	#TO CHANGE WHENEVER CREATING AN INSTANCE OF THIS METHOD
@@ -202,6 +202,14 @@ class DistributorSystemBoundingBox(object):
 			print(DistributorSystemBoundingBox.pathIDSet)
 			DistributorSystemBoundingBox.START_QUEUE_NUMBER = int(str(list(task)[0])[-6:])
 			return
+
+		from boto.s3.connection import S3Connection
+
+		conn = S3Connection(settings.AWS_ACCESS_KEY_ID,settings.AWS_SECRET_ACCESS_KEY)
+		bucket = conn.get_bucket('annokriya-assets')
+
+		for key in bucket.list():
+		    print key.name
 
 		files = list(os.listdir(DistributorSystemBoundingBox.DATAPATH))
 
