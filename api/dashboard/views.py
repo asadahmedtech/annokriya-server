@@ -22,5 +22,8 @@ class UserDashboard(APIView):
         serializer = UserDashboardSerializer(request.user, context={'request': request})
         print("==> DashBoard : ", request.user)
         print("==> Dashboard : ", serializer.data)
+
+        dashboard = Dashboard.objects.get(user=request.user)
+        print(str(dashboard.pending))
         return Response(serializer.data)
 
