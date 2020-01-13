@@ -20,5 +20,7 @@ class UserDashboard(APIView):
     def get(self, request):
         # user = UserProfile.objects.get(pk= pk)
         serializer = UserDashboardSerializer(request.user, context={'request': request})
+        print("==> DashBoard : ", request.user)
+        print("==> Dashboard : ", serializer.data)
         return Response(serializer.data)
 

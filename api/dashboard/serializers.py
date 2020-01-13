@@ -7,5 +7,5 @@ class UserDashboardSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Dashboard
-        fields = ('pending','wrong', 'correct', 'credits')
+        fields = '__all__'
 
