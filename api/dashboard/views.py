@@ -9,6 +9,8 @@ from dashboard.models import Dashboard
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
+import json
+
 class UserDashboard(APIView):
     """View for user to update their profile"""
 
@@ -24,6 +26,8 @@ class UserDashboard(APIView):
         print("==> Dashboard : ", serializer.data)
 
         dashboard = Dashboard.objects.get(user=request.user)
-        print(str(dashboard.pending))
-        return Response(serializer.data)
+        temp_data = {"pending": str(dashboard.pending), "correct": str(dashboard.correct), "wrong": str(dashboard.wrong), "credits": str(dashboard.credits)}
+        temp_data = json.dumps(temp_data)
+        print(temp_data)
+        return Response(temp_data, status=status.HTTP_200_OK)
 
