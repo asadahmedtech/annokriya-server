@@ -90,7 +90,7 @@ class MergerSystem(object):
             output.save()
             print("output is "+str(output))
             print(output.otaskpath)
-            TaskPath.objects.filter(taskgivenID=entry.taskgivenID).delete()
+            # TaskPath.objects.filter(taskgivenID=entry.taskgivenID).delete()
             return str(output)
 
 
@@ -284,7 +284,7 @@ class MergerSystemBoundingBox(object):
                     ow=ow/len(cluster[0][i])
                     out=BoundingBoxObject(x=str(ox),y=str(oy),l=str(ol),h=str(ow),taskid=entry.bb_taskgivenID)
                     out.save()
-                    TaskPathBoundingBox.objects.filter(bb_taskgivenID=entry.bb_taskgivenID).delete()
+                    # TaskPathBoundingBox.objects.filter(bb_taskgivenID=entry.bb_taskgivenID).delete()
                     ox=0
                     oy=0
                     ol=0
