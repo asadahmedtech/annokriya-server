@@ -151,7 +151,7 @@ class MergerSystemBoundingBox(object):
                         x1.append((user_data.x.split('.')[0].strip()))
                         x1.append((user_data.y.split('.')[0].strip()))
                         x1.append((user_data.l.split('.')[0].strip()))
-                        x1.append((user_data.h.split('.')[0].strip())))
+                        x1.append((user_data.h.split('.')[0].strip()))
                         x1.append(user_data.user)
                         u_2.append(x1)
                         u_1.append(u_2)
