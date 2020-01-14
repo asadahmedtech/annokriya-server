@@ -282,8 +282,8 @@ class MergerSystemBoundingBox(object):
                     oy=oy/len(cluster[0][i])
                     ol=ol/len(cluster[0][i])
                     ow=ow/len(cluster[0][i])
-                    out=BoundingBoxObject(x=str(ox),y=str(oy),l=str(ol),h=str(ow),taskid=entry.bb_taskgivenID)
-                    out.save()
+                    #out=BoundingBoxObject(x=str(ox),y=str(oy),l=str(ol),h=str(ow),taskid=entry.bb_taskgivenID)
+                    #out.save()
                     # TaskPathBoundingBox.objects.filter(bb_taskgivenID=entry.bb_taskgivenID).delete()
                     ox=0
                     oy=0
@@ -297,6 +297,8 @@ class MergerSystemBoundingBox(object):
             # print(user_count)
 
             key=list(user_count.keys())
+            print(user_count)
+            print(keys)
             for i in range(0,MergerSystemBoundingBox.VALID-1,1):
                 if((user_count[key[i]]/maxi) >=self.CORRECT_THRESHOLD ):
                     d=Dashboard.objects.filter(user=key[i])
