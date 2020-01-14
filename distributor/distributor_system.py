@@ -263,6 +263,7 @@ class DistributorSystemBoundingBox(object):
 		for i in range(self.TOTAL_DATA_LENGTH):
 			# print(str(self.pathIDSet[i][1]).split('/')+"hihih")
 			# print(str(self.pathIDSet[i][1]).split('/')[-2])
+			#Ok
 			TaskPathBoundingBox.objects.create(bb_taskgivenID = self.TASK_TYPE + str(self.pathIDSet[i][0]).zfill(6),
 				bb_taskPath = str(self.pathIDSet[i][1]), bb_taskTag = str(self.pathIDSet[i][1]).split('/')[-2])
 		DistributorSystemBoundingBox.DB_CREATED = True
