@@ -21,13 +21,15 @@ class UserDashboard(APIView):
 
     def get(self, request):
         # user = UserProfile.objects.get(pk= pk)
-        serializer = UserDashboardSerializer(request.user, context={'request': request})
+        
+
+        dashboard = Dashboard.objects.get(user=request.user)
+        serializer = UserDashboardSerializer(dashboard)
         print("==> DashBoard : ", request.user)
         print("==> Dashboard : ", serializer.data)
 
-        dashboard = Dashboard.objects.get(user=request.user)
         temp_data = {"pending": str(dashboard.pending), "correct": str(dashboard.correct), "wrong": str(dashboard.wrong), "credits": str(dashboard.credits)}
         temp_data = json.dumps(temp_data)
         print(temp_data)
-        return Response(temp_data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
