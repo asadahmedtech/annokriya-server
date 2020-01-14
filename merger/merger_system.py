@@ -298,7 +298,7 @@ class MergerSystemBoundingBox(object):
 
             key=list(user_count.keys())
             print(user_count)
-            print(keys)
+            print(key)
             for i in range(0,MergerSystemBoundingBox.VALID-1,1):
                 if((user_count[key[i]]/maxi) >=self.CORRECT_THRESHOLD ):
                     d=Dashboard.objects.filter(user=key[i])
