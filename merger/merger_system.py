@@ -299,22 +299,22 @@ class MergerSystemBoundingBox(object):
             key=list(user_count.keys())
             print(user_count)
             print(key)
-            for i in range(0,MergerSystemBoundingBox.VALID-1,1):
-                if((user_count[key[i]]/maxi) >=self.CORRECT_THRESHOLD ):
-                    d=Dashboard.objects.filter(user=key[i])
-                    for db in d:
-                        db.pending=db.pending-1
-                        db.correct=db.correct+1
-                        db.credits=str((db.credits) + 1 )
-                        db.save()
-                        break
-                else:
-                    d=Dashboard.objects.filter(user=key[i])
-                    for db in d:
-                        db.pending=db.pending-1
-                        db.wrong=db.wrong+1
-                        db.save()
-                        break
+            # for i in range(0,MergerSystemBoundingBox.VALID-1,1):
+            #     if((user_count[key[i]]/maxi) >=self.CORRECT_THRESHOLD ):
+            #         d=Dashboard.objects.filter(user=key[i])
+            #         for db in d:
+            #             db.pending=db.pending-1
+            #             db.correct=db.correct+1
+            #             db.credits=str((db.credits) + 1 )
+            #             db.save()
+            #             break
+            #     else:
+            #         d=Dashboard.objects.filter(user=key[i])
+            #         for db in d:
+            #             db.pending=db.pending-1
+            #             db.wrong=db.wrong+1
+            #             db.save()
+            #             break
 
             # counts={}
             # for i in range(0,len(cluster[0]-2)):
