@@ -25,4 +25,4 @@ def callPrinterBoundingBox(request):
     bb = BoundingBoxObjectnew.objects.all()
     for b in bb:
         print(b.x+" "+b.y+" "+b.l+" "+b.h+" "+b.taskid+"\n")
-    return HttpResponse('printed the db for bounding box')
+    return HttpResponse('printed the db for bounding box new')
