@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^auth/', include('rest_auth.urls')),
     url(r'^api/task/', include('api.distributor.urls')),
     url(r'^api/dashboard/', include('api.dashboard.urls')),
+    url(r'^api/adminportal/', include('api.adminportal.urls')),
     # url(r'^background/', include('backgroundprocess.urls')),
     # url(r'^api/customers/$', views.customers_list),
     # url(r'^api/customers/(?P<pk>[0-9]+)$', views.customers_detail),

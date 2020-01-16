@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'storages',
     'knox',
     'fileupload',
+    # 'adminportal',
 ]
 
 MIDDLEWARE = [

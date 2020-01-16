@@ -268,7 +268,7 @@ class MergerSystemBoundingBox(object):
                     # print(cluster[0][i])
                     cluster[0][i].clear()
                 else:
-                    #maxi+=1
+                    #maxi+=1        #CHANGED HERE
                     # print("\n\nadding these clustering to get a point\n\n")
                     for j in range(0,len(cluster[0][i]),1):
                         # print(cluster[0][i][j])
@@ -282,14 +282,14 @@ class MergerSystemBoundingBox(object):
                     oy=oy/len(cluster[0][i])
                     ol=ol/len(cluster[0][i])
                     ow=ow/len(cluster[0][i])
-                    out=BoundingBoxObject(x=str(ox),y=str(oy),l=str(ol),h=str(ow),taskid=entry.bb_taskgivenID)
+                    out=BoundingBoxObject(x=str(ox),y=str(oy),l=str(ol),h=str(ow),taskid=entry.bb_taskgivenID, taskurl = entry.bb_taskPath)
                     out.save()
                     # TaskPathBoundingBox.objects.filter(bb_taskgivenID=entry.bb_taskgivenID).delete()
                     ox=0
                     oy=0
                     ol=0
                     ow=0
-            maxi=len(cluster[0])
+            maxi=len(cluster[0])        #CHANGED HERE
             # print("\n\nno\n\n")
             # print(maxi)
             # print("\n\nyes\n\n")
@@ -299,7 +299,7 @@ class MergerSystemBoundingBox(object):
             key=list(user_count.keys())
             print(user_count)
             print(key)
-            for i in range(0,len(key),1):
+            for i in range(0,len(key),1):       #CHANGED HERE
                 if((user_count[key[i]]/maxi) >=self.CORRECT_THRESHOLD ):
                     d=Dashboard.objects.filter(user=key[i])
                     for db in d:
