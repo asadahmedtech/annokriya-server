@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from authentication.models import User, UserProfile
-from merger.models import BoundingBoxObject
+from merger.models import BoundingBoxObject, BoundingBoxObjectnew
 
 
 from rest_framework.pagination import PageNumberPagination
@@ -27,6 +27,6 @@ class CustomPagination(PageNumberPagination):
 class TaskListSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = BoundingBoxObject
+        model = BoundingBoxObjectnew
         fields = '__all__'
 
