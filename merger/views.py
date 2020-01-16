@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .merger_system import MergerSystem, MergerSystemBoundingBox
 from django.http import HttpResponse
-from .models import OutputTable, BoundingBoxObject
+from .models import OutputTable, BoundingBoxObject, BoundingBoxObjectnew
 # Create your views here.
 
 
@@ -22,7 +22,7 @@ def callMergerBoundingBox(request):
     return HttpResponse('added to db for bounding box')
 
 def callPrinterBoundingBox(request):
-    bb = BoundingBoxObject.objects.all()
+    bb = BoundingBoxObjectnew.objects.all()
     for b in bb:
         print(b.x+" "+b.y+" "+b.l+" "+b.h+" "+b.taskid+ " "+b.taskurl+"\n")
     return HttpResponse('printed the db for bounding box new')
