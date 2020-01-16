@@ -38,7 +38,7 @@ class TaskProcessedData(models.Model):
 
 class TaskPathBoundingBox(models.Model):
     bb_taskgivenID = models.CharField(max_length=255, primary_key=True)
-    bb_taskPath = models.CharField(max_length=2550)
+    bb_taskPath = models.CharField(max_length=2000)
     bb_taskTag = models.CharField(max_length=255)
     # bb_taskPath = models.ImageField(upload_to='post_images')
     bb_taskCount = models.IntegerField(default = 0)
