@@ -282,6 +282,8 @@ class MergerSystemBoundingBox(object):
                     oy=oy/len(cluster[0][i])
                     ol=ol/len(cluster[0][i])
                     ow=ow/len(cluster[0][i])
+                    print(entry.bb_taskgivenID)
+                    print(entry.bb_taskPath)
                     out=BoundingBoxObject(x=str(ox),y=str(oy),l=str(ol),h=str(ow),taskid=entry.bb_taskgivenID, taskurl = entry.bb_taskPath)
                     out.save()
                     # TaskPathBoundingBox.objects.filter(bb_taskgivenID=entry.bb_taskgivenID).delete()
