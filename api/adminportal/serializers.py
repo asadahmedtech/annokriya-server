@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from authentication.models import User, UserProfile
-from merger.models import BoundingBoxObject, BoundingBoxObjectnew
+from merger.models import BoundingBoxObject, BoundingBoxObjectnew, BoundingBoxObjectall
 from distributor.models import TaskProcessedDataBoundingBox
 
 from rest_framework.pagination import PageNumberPagination
@@ -33,5 +33,5 @@ class TaskListSerializer(serializers.ModelSerializer):
 class OutPointsSerializer(serializers.ModelSerializer):
 
 	class Meta:
-		model = TaskProcessedDataBoundingBox
+		model = BoundingBoxObjectall
 		fields = '__all__'

@@ -39,3 +39,14 @@ class BoundingBoxObjectnew(models.Model):
 
     # bb_taskpath = models.ForeignKey(TaskPathBoundingBox, on_delete=models.CASCADE)
     # taskcode=models.CharField(max_length=255)
+
+class BoundingBoxObjectall(models.Model):
+    x=models.CharField(max_length=255)
+    y=models.CharField(max_length=255)
+    l=models.CharField(max_length=255)
+    h=models.CharField(max_length=255)
+    taskid = models.CharField(max_length=255)
+    taskurl = models.CharField(max_length=2000)
+
+    # bb_taskpath = models.ForeignKey(TaskPathBoundingBox, on_delete=models.CASCADE)
+    # taskcode=models.CharField(max_length=255)
