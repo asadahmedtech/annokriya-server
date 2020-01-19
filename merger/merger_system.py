@@ -1,5 +1,5 @@
 from distributor.models import TaskPath , TaskProcessedData, TaskPathBoundingBox, TaskProcessedDataBoundingBox
-from .models import OutputTable, BoundingBoxObject, BoundingBoxObjectnew, BoundingBoxObjectall
+from .models import OutputTable, BoundingBoxObject, BoundingBoxObjectnew, BoundingBoxObjectallnew
 from dashboard.models import Dashboard
 from backend import params
 # from sklearn.cluster import DBSCAN
@@ -155,7 +155,7 @@ class MergerSystemBoundingBox(object):
                         x1.append(user_data.user)
                         u_2.append(x1)
                         u_1.append(u_2)
-                        out1 = BoundingBoxObjectall(x=str(x1[0]),y=str(x1[1]),l=str(x1[2]),h=str(x1[3]),taskid=entry.bb_taskgivenID, taskurl = entry.bb_taskPath, user=user_data.user )
+                        out1 = BoundingBoxObjectallnew(x=str(x1[0]),y=str(x1[1]),l=str(x1[2]),h=str(x1[3]),taskid=entry.bb_taskgivenID, taskurl = entry.bb_taskPath, user=user_data.user )
                         out1.save()
                     # u_2[0].append(user_d.user)
                 Tu[j]=u_1

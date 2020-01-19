@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView
 # from .serializers import UserDashboardSerializer
-from merger.models import BoundingBoxObject, BoundingBoxObjectnew, BoundingBoxObjectall
+from merger.models import BoundingBoxObject, BoundingBoxObjectnew, BoundingBoxObjectallnew
 from distributor.models import TaskProcessedDataBoundingBox
 
 from rest_framework.decorators import api_view, permission_classes
@@ -24,4 +24,4 @@ class OutPointsCreateAPIView(ListCreateAPIView):
 
 	serializer_class = OutPointsSerializer
 	pagination_class = CustomPagination
-	queryset = BoundingBoxObjectall.objects.all()
+	queryset = BoundingBoxObjectallnew.objects.all()
