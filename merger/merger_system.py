@@ -1,5 +1,5 @@
 from distributor.models import TaskPath , TaskProcessedData, TaskPathBoundingBox, TaskProcessedDataBoundingBox
-from .models import OutputTable, BoundingBoxObject, BoundingBoxObjectnew
+from .models import OutputTable, BoundingBoxObject
 from dashboard.models import Dashboard
 from backend import params
 # from sklearn.cluster import DBSCAN
@@ -282,9 +282,7 @@ class MergerSystemBoundingBox(object):
                     oy=oy/len(cluster[0][i])
                     ol=ol/len(cluster[0][i])
                     ow=ow/len(cluster[0][i])
-                    print(entry.bb_taskgivenID)
-                    print(entry.bb_taskPath)
-                    out=BoundingBoxObjectnew(x=str(ox),y=str(oy),l=str(ol),h=str(ow),taskid=entry.bb_taskgivenID,taskurl = entry.bb_taskPath)
+                    out=BoundingBoxObject(x=str(ox),y=str(oy),l=str(ol),h=str(ow),taskid=entry.bb_taskgivenID, taskurl = entry.bb_taskPath)
                     out.save()
                     # TaskPathBoundingBox.objects.filter(bb_taskgivenID=entry.bb_taskgivenID).delete()
                     ox=0
