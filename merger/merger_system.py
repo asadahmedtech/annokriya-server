@@ -155,6 +155,8 @@ class MergerSystemBoundingBox(object):
                         x1.append(user_data.user)
                         u_2.append(x1)
                         u_1.append(u_2)
+                        out1 = BoundingBoxObjectall(x=str(x1[0]),y=str(x1[1]),l=str(x1[2]),h=str(x1[3]),taskid=entry.bb_taskgivenID, taskurl = entry.bb_taskPath, user=user_data.user )
+                        out1.save()
                     # u_2[0].append(user_d.user)
                 Tu[j]=u_1
                 j=j+1
@@ -278,8 +280,6 @@ class MergerSystemBoundingBox(object):
                         oy+=(int(cluster[0][i][j][1]))
                         ol+=(int(cluster[0][i][j][2]))
                         ow+=(int(cluster[0][i][j][3]))
-                        out1 = BoundingBoxObjectall(x=str(int(cluster[0][i][j][0])),y=str(int(cluster[0][i][j][1])),l=str(int(cluster[0][i][j][2])),h=str(int(cluster[0][i][j][3])),taskid=entry.bb_taskgivenID, taskurl = entry.bb_taskPath)
-                        out1.save()
                         
                     ox=ox/len(cluster[0][i])
                     oy=oy/len(cluster[0][i])
